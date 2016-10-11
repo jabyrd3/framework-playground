@@ -25,24 +25,6 @@ config({
   apiUrl: 'https://jsonplaceholder.typicode.com',
   endpoints: ['posts', 'users'],
   legacy: true})
-const refreshView = () => {
-  apiService()
-    .posts()
-    .get({'_start': 0, '_limit': state.articleCount})
-    .then(res => {
-      state.articles = _.chain(res).map(article => {
-        // return _.extend(article, {author: _.find(state.user, {id: article.id})})
-        console.log(_.chain(state.users).find({id: article.userId}).pick(['name']).merge(article).value())
-        return _.chain(state.users)
-          .find({id: article.userId})
-          .pick(['name'])
-          .merge(article)
-          .value()
-      }).value()
-      console.log(`state`, state.articles)
-    })
-    .catch(err => { console.warn('apiErr', err) })
-}
 apiService()
   .users()
   .get()
@@ -70,6 +52,24 @@ export default {
       state.checked = newValue
     }
   }
+}
+const refreshView = () => {
+  apiService()
+    .posts(``)
+    .get({'_start': 0, '_limit': state.articleCount})
+    .then(res => {
+      state.articles = _.chain(res).map(article => {
+        // return _.extend(article, {author: _.find(state.user, {id: article.id})})
+        console.log(_.chain(state.users).find({id: article.userId}).pick(['name']).merge(article).value())
+        return _.chain(state.users)
+          .find({id: article.userId})
+          .pick(['name'])
+          .merge(article)
+          .value()
+      }).value()
+      console.log(`state`, state.articles)
+    })
+    .catch(err => { console.warn('apiErr', err) })
 }
 </script>
 
