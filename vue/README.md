@@ -1,6 +1,7 @@
 # vue-demo
 
 > vue demo for daniel
+
 i know this looks intimidating. Yes there is a lot of boilerplate to support all sorts of fancy build tooling that makes interactive coding possible (and nice). the only bits you have to worry about, once you've gotten nodejs installed, are the files in src, specifically: main.js, App.vue, and anything in the components folder.
 
 ## from the top
